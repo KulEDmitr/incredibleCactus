@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--one element of recycler view-->
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimaryDark"
+    android:padding="2dip">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/thumb"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_margin="3dip"
+            android:layout_marginEnd="10dip" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:lines="4"
+            android:textColor="@color/textColor"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+</FrameLayout>
