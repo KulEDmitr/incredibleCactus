@@ -116,18 +116,8 @@ public class DetailFragment extends Fragment {
         Log.d(LOG_TAG, "onDestroyView");
 
         super.onDestroyView();
-
         if (isVisible()) {
             Picasso.with(getActivity()).cancelTag(DetailActivity.class);
         }
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(LOG_TAG, "onSaveInstanceState");
-            outState.putParcelableArrayList(ITEM_ID,
-                    Objects.requireNonNull(getActivity()).getIntent()
-                            .getParcelableArrayListExtra(ITEM_ID));
-        super.onSaveInstanceState(outState);
     }
 }

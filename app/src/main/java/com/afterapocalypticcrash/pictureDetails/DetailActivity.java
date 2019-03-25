@@ -34,7 +34,6 @@ public class DetailActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         Log.d(LOG_TAG, "onSaveInstanceState");
-
         super.onSaveInstanceState(outState);
         outState.putString(ITEM_ID, getIntent().getStringExtra(ITEM_ID));
     }

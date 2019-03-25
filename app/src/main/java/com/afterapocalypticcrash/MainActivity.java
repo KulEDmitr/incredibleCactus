@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AllData.getItemMap().clear();
-
         findViewById(R.id.starter_s).setOnClickListener(v -> {
             Log.d(LOG_TAG, "onClick (StartSearching)");
             startActivity(new Intent(this, SearchActivity.class));

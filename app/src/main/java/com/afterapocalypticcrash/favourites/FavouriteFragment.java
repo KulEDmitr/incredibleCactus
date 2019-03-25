@@ -84,7 +84,6 @@ public class FavouriteFragment extends Fragment {
                             AllData.addItem(item);
                             fav.add(item);
                         }
-                        Log.e(LOG_TAG, Integer.toString(fav.size()));
                         setupRecyclerView(fav);
                     } else {
                         Toast.makeText(getContext(),
@@ -100,12 +99,11 @@ public class FavouriteFragment extends Fragment {
 
     private void setupRecyclerView(List<PictureApiContent.Results> res) {
         Log.d(LOG_TAG, "setupRecyclerView");
-
-//        if (!isVisible()) {
-//            return;
-//        }
+        getActivity().getIntent()
+                .putParcelableArrayListExtra(FAVOURITE_LIST, new ArrayList<>(res));
         list.setAdapter(new RecyclerViewAdapter(res));
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
+
     }
 
     @Override
@@ -119,11 +117,13 @@ public class FavouriteFragment extends Fragment {
     @Override
     public void onDestroyView() {
         Log.d(LOG_TAG, "onDestroyView");
-
-        super.onDestroyView();
-        Objects.requireNonNull(subscribe).dispose();
+        if (subscribe != null) {
+            subscribe.dispose();
+        }
         if (isVisible()) {
             Picasso.with(getActivity()).cancelTag(FavouriteActivity.class);
         }
+        super.onDestroyView();
+
     }
 }

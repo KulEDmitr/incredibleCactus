@@ -17,12 +17,11 @@ public class AppDelegate extends Application {
 
         super.onCreate();
         picDataBase = Room.databaseBuilder(this, PicturesDataBase.class,
-                "picture_database")/*.allowMainThreadQueries()*/.build();
+                "picture_database").build();
     }
 
     public PicturesDataBase getPicDataBase() {
         Log.d("APP", "getPicDataBase");
-
         return picDataBase;
     }
 }

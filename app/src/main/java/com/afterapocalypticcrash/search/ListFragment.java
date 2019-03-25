@@ -18,6 +18,7 @@ import com.afterapocalypticcrash.search.api.PictureApiContent;
 import com.afterapocalypticcrash.recyclerAdapter.RecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -58,8 +59,6 @@ public class ListFragment extends Fragment {
             getActivity().getIntent()
                     .putParcelableArrayListExtra(RESULT_LIST,
                             savedInstanceState.getParcelableArrayList(RESULT_LIST));
-            getActivity().getIntent()
-                    .putExtra("TWO_PANE", savedInstanceState.getBoolean("TWO_PANE"));
             setupRecyclerView(savedInstanceState.getParcelableArrayList(RESULT_LIST));
         } else {
             getData();
@@ -95,10 +94,8 @@ public class ListFragment extends Fragment {
 
     private void setupRecyclerView(List<PictureApiContent.Results> res) {
         Log.d(LOG_TAG, "setupRecyclerView");
-
-//        if (!isVisible()) {
-//            return;
-//        }
+        getActivity().getIntent()
+                .putParcelableArrayListExtra(RESULT_LIST, new ArrayList<>(res));
         list.setAdapter(new RecyclerViewAdapter(res));
         list.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
@@ -106,20 +103,21 @@ public class ListFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         Log.d(LOG_TAG, "onSaveInstanceState");
-        super.onSaveInstanceState(outState);
         outState.putString(QUERY, getActivity().getIntent().getStringExtra(QUERY));
         outState.putParcelableArrayList(RESULT_LIST, getActivity().getIntent()
                 .getParcelableArrayListExtra(RESULT_LIST));
+        super.onSaveInstanceState(outState);
     }
 
     @Override
     public void onDestroyView() {
         Log.d(LOG_TAG, "onDestroyView");
-
-        super.onDestroyView();
-        Objects.requireNonNull(subscribe).dispose();
-//        if (isVisible()) {
+        if (subscribe != null) {
+            subscribe.dispose();
+        }
+        if (isVisible()) {
             Picasso.with(getActivity()).cancelTag(ListActivity.class);
-//        }
+        }
+        super.onDestroyView();
     }
 }
