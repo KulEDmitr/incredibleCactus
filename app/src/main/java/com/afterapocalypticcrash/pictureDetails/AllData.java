@@ -1,4 +1,6 @@
-package com.afterapocalypticcrash.api;
+package com.afterapocalypticcrash.pictureDetails;
+
+import com.afterapocalypticcrash.search.api.PictureApiContent;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,4 +16,10 @@ public class AllData {
     public static Map<String, PictureApiContent.Results> getItemMap() {
         return ITEM_MAP;
     }
+
+    public static PictureApiContent.Results getItem(String id) {
+        return ITEM_MAP.get(id);
+    }
+
+
 }

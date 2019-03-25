@@ -19,10 +19,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".akaMasterDetail.ListActivity" />
-        <activity android:name=".akaMasterDetail.DetailActivity" />
-        <activity android:name=".favourites.FavouriteListActivity" />
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".search.ListActivity" />
+        <activity android:name=".pictureDetails.DetailActivity" />
+        <activity android:name=".favourites.FavouriteActivity" />
     </application>
 
 </manifest>

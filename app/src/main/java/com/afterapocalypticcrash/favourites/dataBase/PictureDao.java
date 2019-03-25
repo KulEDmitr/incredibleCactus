@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.dataBase;
+package com.afterapocalypticcrash.favourites.dataBase;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -8,16 +8,18 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
+
 @Dao
 public interface PictureDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertLPic(PictureBD pic);
+    void insert(PictureBD pic);
 
-    @Query("SELECT * FROM favourites") //получаем лист по запросу
-    List<PictureBD> getFavouriteList ();
+    @Query("SELECT * FROM favourites")
+    Flowable<List<PictureBD>> getFavouriteList ();
 
     @Delete
-    void deletePicture (PictureBD pic);//удаляем одну картинку...удаление из избранного
+    void deletePic (PictureBD pic);
 
 }

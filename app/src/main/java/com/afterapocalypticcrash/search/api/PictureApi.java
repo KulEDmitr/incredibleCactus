@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.api;
+package com.afterapocalypticcrash.search.api;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

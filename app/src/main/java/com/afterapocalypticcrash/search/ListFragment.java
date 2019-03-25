@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.akaMasterDetail;
+package com.afterapocalypticcrash.search;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,11 +10,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.afterapocalypticcrash.R;
-import com.afterapocalypticcrash.api.AllData;
-import com.afterapocalypticcrash.api.PictureApiContent;
-import com.afterapocalypticcrash.akaMasterDetail.recyclerAdapter.RecyclerViewAdapter;
+import com.afterapocalypticcrash.pictureDetails.AllData;
+import com.afterapocalypticcrash.search.api.PictureApiContent;
+import com.afterapocalypticcrash.recyclerAdapter.RecyclerViewAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,29 +24,22 @@ import java.util.Objects;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 
-import static com.afterapocalypticcrash.api.RetrofitModule.getApiInstance;
+import static com.afterapocalypticcrash.search.api.RetrofitModule.getApiInstance;
 
 public class ListFragment extends Fragment {
-    static final String LOG_TAG = ListFragment.class.getSimpleName();
+    private static final String LOG_TAG = ListFragment.class.getSimpleName();
 
-    static final String QUERY = "QUERY";
-    static final String RESULT_LIST = "RESULT_LIST";
+    private static final String QUERY = "QUERY";
+    private static final String RESULT_LIST = "RESULT_LIST";
 
-    Disposable subscribe;
-
+    private Disposable subscribe;
     private RecyclerView list;
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Log.e(LOG_TAG, "onCreate");
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Log.e(LOG_TAG, "onCreateView");
+        Log.d(LOG_TAG, "onCreateView");
 
         View view = inflater.inflate(R.layout.activity_pictures_list, container, false);
         list = view.findViewById(R.id.res_list);
@@ -54,10 +48,9 @@ public class ListFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        Log.e(LOG_TAG, "onActivityCreated");
+        Log.d(LOG_TAG, "onActivityCreated");
 
         super.onActivityCreated(savedInstanceState);
-
 
         if (savedInstanceState != null) {
             Objects.requireNonNull(getActivity()).getIntent()
@@ -65,6 +58,8 @@ public class ListFragment extends Fragment {
             getActivity().getIntent()
                     .putParcelableArrayListExtra(RESULT_LIST,
                             savedInstanceState.getParcelableArrayList(RESULT_LIST));
+            getActivity().getIntent()
+                    .putExtra("TWO_PANE", savedInstanceState.getBoolean("TWO_PANE"));
             setupRecyclerView(savedInstanceState.getParcelableArrayList(RESULT_LIST));
         } else {
             getData();
@@ -72,7 +67,7 @@ public class ListFragment extends Fragment {
     }
 
     private void getData() {
-        Log.e(LOG_TAG, "getData");
+        Log.d(LOG_TAG, "getData");
 
         subscribe = getApiInstance()
                 .getResults(Objects.requireNonNull(getArguments()).getString(QUERY))
@@ -86,23 +81,20 @@ public class ListFragment extends Fragment {
                                 }
                                 setupRecyclerView(pictures.getResults());
                             } else {
-                                Log.e(LOG_TAG, "some error occured");
-//                                Intent errorIntent = new Intent(getActivity(), ErrorActivity.class);
-//                                errorIntent.putExtra("ERROR", "no results for your request");
-//                                startActivity(errorIntent);
+                                Toast.makeText(getContext(),
+                                        "there are no results", Toast.LENGTH_LONG).show();
                             }
                         }, throwable -> {
+                            Toast.makeText(getContext(),
+                                    "some error occured, \nPlease, repeat your query",
+                                    Toast.LENGTH_LONG).show();
                             throwable.printStackTrace();
-//                            Intent errorIntent = new Intent(getActivity(), ErrorActivity.class);
-//                            errorIntent.putExtra("ERROR",
-//                                    throwable.getMessage());
-//                            startActivity(errorIntent);
                         }
                 );
     }
 
     private void setupRecyclerView(List<PictureApiContent.Results> res) {
-        Log.e(LOG_TAG, "setupRecyclerView");
+        Log.d(LOG_TAG, "setupRecyclerView");
 
 //        if (!isVisible()) {
 //            return;
@@ -112,13 +104,22 @@ public class ListFragment extends Fragment {
     }
 
     @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        Log.d(LOG_TAG, "onSaveInstanceState");
+        super.onSaveInstanceState(outState);
+        outState.putString(QUERY, getActivity().getIntent().getStringExtra(QUERY));
+        outState.putParcelableArrayList(RESULT_LIST, getActivity().getIntent()
+                .getParcelableArrayListExtra(RESULT_LIST));
+    }
+
+    @Override
     public void onDestroyView() {
-        Log.w(LOG_TAG, "onDestroyView");
+        Log.d(LOG_TAG, "onDestroyView");
 
         super.onDestroyView();
         Objects.requireNonNull(subscribe).dispose();
-        if (isVisible()) {
+//        if (isVisible()) {
             Picasso.with(getActivity()).cancelTag(ListActivity.class);
-        }
+//        }
     }
 }

@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.dataBase;
+package com.afterapocalypticcrash.favourites.dataBase;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.akaMasterDetail;
+package com.afterapocalypticcrash.search;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +15,7 @@ public class ListActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.e(LOG_TAG, "onCreate");
+        Log.d(LOG_TAG, "onCreate");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_list);
@@ -34,37 +34,16 @@ public class ListActivity extends AppCompatActivity {
             getIntent().putExtra(QUERY, savedInstanceState.getString(QUERY));
             getIntent().putParcelableArrayListExtra(RESULT_LIST,
                     savedInstanceState.getParcelableArrayList(RESULT_LIST));
+
         }
     }
 
-
-
-
-//    private void showPictureContent(Picture picture){
-//        ContentFragment fr = new ContentFragment();
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable("PICTURE", picture);
-//        fr.setArguments(bundle);
-//        View fr2 = findViewById(R.id.content_list_fragment_land);
-//        if (fr2 != null) {
-//            fr2.setVisibility(View.VISIBLE);
-//            getSupportFragmentManager().beginTransaction()
-//                    .replace(R.id.content_list_fragment_land, fr)
-//                    .addToBackStack("list")
-//                    .commitAllowingStateLoss();
-//        } else {
-//            getSupportFragmentManager().beginTransaction()
-//                    .add(R.id.res_list_fragment, fr)
-//                    .addToBackStack("list")
-//                    .commitAllowingStateLoss();
-//        }
-//    }
-
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        Log.w(LOG_TAG, "onSaveInstanceState");
+        Log.d(LOG_TAG, "onSaveInstanceState");
         super.onSaveInstanceState(outState);
         outState.putString(QUERY, getIntent().getStringExtra(QUERY));
-        outState.putParcelableArrayList(RESULT_LIST, getIntent().getParcelableArrayListExtra(RESULT_LIST));
+        outState.putParcelableArrayList(RESULT_LIST, getIntent()
+                .getParcelableArrayListExtra(RESULT_LIST));
     }
 }

@@ -1,12 +1,13 @@
-package com.afterapocalypticcrash.akaMasterDetail.recyclerAdapter;
+package com.afterapocalypticcrash.recyclerAdapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.afterapocalypticcrash.R;
-import com.afterapocalypticcrash.api.PictureApiContent;
+import com.afterapocalypticcrash.search.api.PictureApiContent;
 import com.squareup.picasso.Picasso;
 
 class AdapterViewHolder extends RecyclerView.ViewHolder {
@@ -17,11 +18,15 @@ class AdapterViewHolder extends RecyclerView.ViewHolder {
 
     AdapterViewHolder(View itemView) {
         super(itemView);
+        Log.d(LOG_TAG, "AdapterViewHolder");
+
         imView = itemView.findViewById(R.id.thumb);
         descrView = itemView.findViewById(R.id.description);
     }
 
     void bind(PictureApiContent.Results item) {
+        Log.d(LOG_TAG, "bind");
+
         descrView.setText(item.toString());
         Picasso.with(descrView.getContext())
                 .load(item.getUrls().getThumb())

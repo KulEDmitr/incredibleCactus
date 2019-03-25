@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.dataBase;
+package com.afterapocalypticcrash.favourites.dataBase;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
@@ -13,6 +13,8 @@ public class PictureBD {
     @NonNull
     private String id; //    String id;
 
+    private int likes;
+
     private String username; // String user.username
 
     @ColumnInfo(name = "profile_image")
@@ -25,15 +27,23 @@ public class PictureBD {
 
     private String regular;   //urls.regular
 
+    private String name; //user.name
+
+    private String description;
+
     @Ignore
-    public PictureBD(@NonNull String id, String username, String authorsProfileImage,
-                     String userHtml, String thumb, String regular) {
+    public PictureBD(@NonNull String id, int likes, String description, String username,
+                     String authorsProfileImage, String userHtml, String thumb,
+                     String regular, String name) {
         this.id = id;
+        this.likes = likes;
+        this.description = description;
         this.username = username;
         this.authorsProfileImage = authorsProfileImage;
         this.userHtml = userHtml;
         this.thumb = thumb;
         this.regular = regular;
+        this.name = name;
     }
 
     public PictureBD(@NonNull String id) {
@@ -45,6 +55,14 @@ public class PictureBD {
     }
     public void setId(@NonNull String id) {
         this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getUsername() {
@@ -82,4 +100,34 @@ public class PictureBD {
         this.regular = regular;
     }
 
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "PictureBD{" +
+                "\n id ='" + id + '\'' +
+                ",\n likes =" + likes +
+                ",\n username ='" + username + '\'' +
+                ",\n authorsProfileImage ='" + authorsProfileImage + '\'' +
+                ",\n userHtml ='" + userHtml + '\'' +
+                ",\n thumb ='" + thumb + '\'' +
+                ",\n regular ='" + regular + '\'' +
+                ",\n name= '" + name + '\'' +
+                ",\n description= '" + description + '\'' +
+                '}';
+    }
 }

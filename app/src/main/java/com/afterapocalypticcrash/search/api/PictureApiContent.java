@@ -1,6 +1,5 @@
-package com.afterapocalypticcrash.api;
+package com.afterapocalypticcrash.search.api;
 
-import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -25,6 +24,15 @@ public class PictureApiContent {
         private String description;
         private User user;
         private Urls urls;
+
+        public Results(String id, int likes, String description, String username, String name,
+                       String large, String http, String thumb, String regular) {
+            this.id = id;
+            this.likes = likes;
+            this.description = description;
+            this.user = new User(username, name, large, http);
+            this.urls = new Urls(thumb, regular);
+        }
 
         public String getId() {
             return id;
@@ -76,14 +84,15 @@ public class PictureApiContent {
 
         @NonNull
         public String getFullDescription() {
-            return (description == null)
-                    ? ("This image has no description\nJust enjoy the picture")
-                    : (description + "\nLikes: " + Integer.toString(likes));
+            String out;
+            out = (description == null) ? ("") : (description + "\n");
+            return out + "likes: " + Integer.toString(likes);
         }
 
         @NonNull
         public String getUserInfo() {
-            return (getUser().getUsername() + "\n\nPress to go to Unsplash.com account");
+            return ("Photo by: " + getUser().getUsername()
+                    + "\n( " + getUser().getName() + " )\nPress to go to Unsplash.com account");
         }
 
         @Override
@@ -96,11 +105,11 @@ public class PictureApiContent {
             dest.writeStringArray(new String[]
                     {id, description, Integer.toString(likes), urls.getThumb(), urls.getRegular(),
                             user.getUsername(), user.getProfile_image().getLarge(),
-                            user.getLinks().getHtml()});
+                            user.getLinks().getHtml(), user.getName()});
         }
 
         protected Results(Parcel in) {
-            String[] data = new String[8];
+            String[] data = new String[9];
             in.readStringArray(data);
             id = data[0];
             description = data[1];
@@ -110,6 +119,7 @@ public class PictureApiContent {
             user.setUsername(data[5]);
             user.getProfile_image().setLarge(data[6]);
             user.getLinks().setHtml(data[7]);
+            user.setName(data[8]);
         }
 
         public static final Creator<Results> CREATOR = new Creator<Results>() {
@@ -128,8 +138,16 @@ public class PictureApiContent {
         public static class User {
 
             private String username;
+            private String name;
             private ProfileImage profile_image;
             private UserLinks links;
+
+            public User(String username, String name, String large, String http) {
+                this.username = username;
+                this.name = name;
+                this.profile_image = new ProfileImage(large);
+                this.links = new UserLinks(http);
+            }
 
             public String getUsername() {
                 return username;
@@ -137,6 +155,14 @@ public class PictureApiContent {
 
             public void setUsername(String username) {
                 this.username = username;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
             }
 
             public ProfileImage getProfile_image() {
@@ -155,9 +181,14 @@ public class PictureApiContent {
                 this.links = links;
             }
 
+
             public static class ProfileImage {
 
                 private String large;
+
+                public ProfileImage(String large) {
+                    this.large = large;
+                }
 
                 public String getLarge() {
                     return large;
@@ -171,6 +202,10 @@ public class PictureApiContent {
             public static class UserLinks {
 
                 private String html;
+
+                public UserLinks(String html) {
+                    this.html = html;
+                }
 
                 public String getHtml() {
                     return html;
@@ -186,6 +221,11 @@ public class PictureApiContent {
 
             private String thumb;
             private String regular;
+
+            public Urls(String thumb, String regular) {
+                this.thumb = thumb;
+                this.regular = regular;
+            }
 
             public String getThumb() {
                 return thumb;
