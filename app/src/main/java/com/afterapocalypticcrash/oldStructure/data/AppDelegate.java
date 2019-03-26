@@ -1,15 +1,15 @@
-package com.afterapocalypticcrash;
+package com.afterapocalypticcrash.oldStructure.data;
 
 import android.app.Application;
 import android.arch.persistence.room.Room;
 import android.util.Log;
 
-import com.afterapocalypticcrash.favourites.dataBase.PicturesDataBase;
+import com.afterapocalypticcrash.oldStructure.model.dao.PicturesDataBase;
 
 
 public class AppDelegate extends Application {
 
-    private PicturesDataBase picDataBase;
+    private static PicturesDataBase picDataBase;
 
     @Override
     public void onCreate() {
@@ -20,7 +20,7 @@ public class AppDelegate extends Application {
                 "picture_database").build();
     }
 
-    public PicturesDataBase getPicDataBase() {
+    public static PicturesDataBase getPicDataBase() {
         Log.d("APP", "getPicDataBase");
         return picDataBase;
     }

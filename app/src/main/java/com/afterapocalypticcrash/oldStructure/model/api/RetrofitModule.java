@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.search.api;
+package com.afterapocalypticcrash.oldStructure.model.api;
 
 import android.util.Log;
 

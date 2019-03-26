@@ -1,4 +1,4 @@
-package com.afterapocalypticcrash.search.api;
+package com.afterapocalypticcrash.oldStructure.data.structures;
 
 import android.os.Parcel;
 import android.os.Parcelable;

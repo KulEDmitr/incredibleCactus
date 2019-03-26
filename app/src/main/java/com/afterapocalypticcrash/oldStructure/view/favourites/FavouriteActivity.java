@@ -1,12 +1,13 @@
-package com.afterapocalypticcrash.favourites;
+package com.afterapocalypticcrash.oldStructure.view.favourites;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.afterapocalypticcrash.R;
+import com.afterapocalypticcrash.oldStructure.presenter.HandToHand;
 
-public class FavouriteActivity extends AppCompatActivity {
+public class FavouriteActivity extends AppCompatActivity{
     private static final String LOG_TAG = FavouriteActivity.class.getSimpleName();
 
     @Override
@@ -16,10 +17,9 @@ public class FavouriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_list);
 
-        if (savedInstanceState == null) {
+        if (HandToHand.getList() == null) {
             FavouriteFragment fr = new FavouriteFragment();
-            Bundle bundle = new Bundle();
-            fr.setArguments(bundle);
+            fr.setArguments(new Bundle());
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.res_list_fragment, fr)
                     .commitAllowingStateLoss();

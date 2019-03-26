@@ -1,7 +1,9 @@
-package com.afterapocalypticcrash.favourites.dataBase;
+package com.afterapocalypticcrash.oldStructure.model.dao;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;
+
+import com.afterapocalypticcrash.oldStructure.data.structures.PictureBD;
 
 @Database(entities = {PictureBD.class}, version = 1, exportSchema = false)
 

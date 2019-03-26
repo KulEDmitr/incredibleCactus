@@ -1,16 +1,17 @@
-package com.afterapocalypticcrash;
+package com.afterapocalypticcrash.oldStructure.view;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.afterapocalypticcrash.favourites.FavouriteActivity;
-import com.afterapocalypticcrash.pictureDetails.AllData;
-import com.afterapocalypticcrash.search.SearchActivity;
+import com.afterapocalypticcrash.R;
+import com.afterapocalypticcrash.oldStructure.view.favourites.FavouriteActivity;
+import com.afterapocalypticcrash.oldStructure.view.search.SearchActivity;
 
 public class MainActivity extends AppCompatActivity {
     static final String LOG_TAG = MainActivity.class.getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

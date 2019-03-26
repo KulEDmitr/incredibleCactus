@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:padding="16dip"
     android:textIsSelectable="true"
-    tools:context=".MainActivity">
+    tools:context=".oldStructure.view.MainActivity">
 
     <ImageView
         android:id="@+id/picture"

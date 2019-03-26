@@ -1,4 +1,6 @@
-package com.afterapocalypticcrash.search.api;
+package com.afterapocalypticcrash.oldStructure.model.api;
+
+import com.afterapocalypticcrash.oldStructure.data.structures.PictureApiContent;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

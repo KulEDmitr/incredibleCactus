@@ -1,13 +1,13 @@
-package com.afterapocalypticcrash.search;
+package com.afterapocalypticcrash.oldStructure.view.search;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.afterapocalypticcrash.R;
+import com.afterapocalypticcrash.oldStructure.presenter.HandToHand;
 
 public class SearchActivity extends AppCompatActivity {
     static final String LOG_TAG = SearchActivity.class.getSimpleName();
@@ -23,15 +23,10 @@ public class SearchActivity extends AppCompatActivity {
 
         findViewById(R.id.starter).setOnClickListener(v -> {
             Log.d(LOG_TAG, "onClick (StartSearching)");
-
+            HandToHand.getList().clear();
             String query = ((EditText) findViewById(R.id.query)).getText().toString();
-            if (!query.isEmpty()) {
-                intent.putExtra("QUERY", query);
-                startActivity(intent);
-            } else {
-                intent.putExtra("QUERY", "monochrome");
-                startActivity(intent);
-            }
+            HandToHand.setKey((!query.isEmpty()) ? (query) : ("monochrome"));
+            startActivity(intent);
         });
     }
 }

@@ -1,10 +1,12 @@
-package com.afterapocalypticcrash.favourites.dataBase;
+package com.afterapocalypticcrash.oldStructure.model.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
+
+import com.afterapocalypticcrash.oldStructure.data.structures.PictureBD;
 
 import java.util.List;
 
