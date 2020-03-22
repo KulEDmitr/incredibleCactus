@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">300dp</dimen>
+    <dimen name="picture_preview">100dp</dimen>
+    <dimen name="picture_margin">4dp</dimen>
+    <dimen name="uni_margin">16dp</dimen>
+</resources>
